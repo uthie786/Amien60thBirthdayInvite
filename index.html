@@ -219,6 +219,23 @@
   .btn:nth-child(3){background:var(--sky); transform:rotate(-.5deg)}
   .btn:hover{transform:rotate(0) translateY(-2px)} .btn:active{transform:translate(2px,3px); box-shadow:1px 1px 0 rgba(0,0,0,.35)}
   .closed{font-family:'Special Elite'!important; font-size:1rem!important; color:var(--gold)}
+  .contacts{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:22px}
+  @media (max-width:560px){ .contacts{grid-template-columns:1fr} }
+  .contact{
+    position:relative; background:var(--paper); color:var(--ink); padding:18px 14px 16px; text-align:center;
+    box-shadow:0 6px 12px rgba(0,0,0,.3);
+    background-image:repeating-linear-gradient(transparent 0 23px, rgba(127,176,220,.35) 23px 24px);
+  }
+  .contact:nth-child(1){transform:rotate(-1.5deg)} .contact:nth-child(2){transform:rotate(1.5deg)}
+  .contact .clip{
+    position:absolute; top:-12px; left:50%; width:70px; height:24px; transform:translateX(-50%) rotate(-3deg);
+    background:var(--tape); clip-path:polygon(3% 0,97% 4%,100% 50%,96% 100%,2% 96%,0 50%);
+  }
+  .contact:nth-child(2) .clip{background:rgba(127,176,220,.8); transform:translateX(-50%) rotate(4deg)}
+  .contact h4{font-family:'Permanent Marker'; font-weight:400; font-size:1.5rem; color:var(--navy)}
+  .contact .num{font-family:'Special Elite'; letter-spacing:.08em; font-size:1rem; margin-top:2px}
+  .contact .btns{gap:7px; margin-top:12px}
+  .contact .btn{padding:8px 9px; font-size:.8rem; gap:5px}
 
   /* stickers */
   .sticker{
@@ -346,12 +363,29 @@
       <div class="tape" style="top:-14px;left:12%;transform:rotate(-5deg)"></div>
       <div class="tape blue" style="top:-14px;right:12%;transform:rotate(6deg)"></div>
       <h2>Kindly RSVP</h2>
-      <p>by the 25<sup>th</sup> of December to Sara</p>
+      <p>by the 25<sup>th</sup> of December to Sara or Fawzie</p>
       <p class="warn">no RSVP = no attendance!</p>
-      <div class="btns" id="rsvpBtns">
-        <a class="btn" id="waBtn" target="_blank" rel="noopener">💬 WhatsApp Sara</a>
-        <a class="btn" href="tel:+27825676874">📞 082 567 6874</a>
-        <a class="btn" href="sms:+27825676874">✉️ SMS</a>
+      <div class="contacts" id="rsvpBtns">
+        <div class="contact">
+          <div class="clip"></div>
+          <h4>Sara</h4>
+          <div class="num">082 567 6874</div>
+          <div class="btns">
+            <a class="btn wa" data-name="Sara" data-phone="27825676874" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a class="btn" href="tel:+27825676874">📞 Call</a>
+            <a class="btn" href="sms:+27825676874">✉️ SMS</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="clip"></div>
+          <h4>Fawzie</h4>
+          <div class="num">060 610 3297</div>
+          <div class="btns">
+            <a class="btn wa" data-name="Fawzie" data-phone="27606103297" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a class="btn" href="tel:+27606103297">📞 Call</a>
+            <a class="btn" href="sms:+27606103297">✉️ SMS</a>
+          </div>
+        </div>
       </div>
       <div class="stamp">RSVP<br>BY<br>25 DEC</div>
     </div>
@@ -443,8 +477,10 @@
   tick();
 
   /* ---------- RSVP ---------- */
-  const msg = "Hi Sara! I'd love to RSVP for Amien's 60th birthday on Saturday 16 January 🎉\nName(s): \nNumber attending: ";
-  document.getElementById('waBtn').href = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(msg);
+  document.querySelectorAll('.btn.wa').forEach(a => {
+    const msg = "Hi " + a.dataset.name + "! I'd love to RSVP for Amien's 60th birthday on Saturday 16 January 🎉\nName(s): \nNumber attending: ";
+    a.href = 'https://wa.me/' + a.dataset.phone + '?text=' + encodeURIComponent(msg);
+  });
   if (new Date() >= RSVP_BY){
     document.getElementById('rsvpBtns').insertAdjacentHTML('beforebegin','<p class="closed">RSVPs have closed — see you there!</p>');
   }
@@ -461,7 +497,7 @@
       'DTEND;VALUE=DATE:20270117',
       "SUMMARY:Amien's 60th Birthday 🎉",
       'LOCATION:Rietvlei Zoo Playground Hall',
-      'DESCRIPTION:Dress in blue! RSVP to Sara (082 567 6874) by 25 December.',
+      'DESCRIPTION:Dress in blue! RSVP to Sara (082 567 6874) or Fawzie (060 610 3297) by 25 December.',
       'END:VEVENT','END:VCALENDAR'
     ].join('\r\n');
     const url = URL.createObjectURL(new Blob([ics], {type:'text/calendar'}));
