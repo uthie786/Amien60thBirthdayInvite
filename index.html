@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amien's 60th Birthday</title>
+<meta name="description" content="You're invited to celebrate Amien Naidoo's 60th birthday — Saturday 16 January.">
+<meta property="og:title" content="You're invited: Amien's 60th Birthday!">
+<meta property="og:description" content="Saturday 16 January · Rietvlei Zoo Playground Hall · Dress in blue">
+<meta name="theme-color" content="#1f3b5c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎈</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caveat:wght@500;700&family=Homemade+Apple&family=Special+Elite&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1f3b5c; --navy-2:#2c5582; --sky:#7fb0dc; --gold:#f2d38a; --gold-2:#d9a943;
+    --kraft:#c9a77c; --paper:#fbf6ea; --cream:#f4ecd8; --ink:#2b2622; --red:#c8553d;
+    --tape:rgba(242,211,138,.72);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{
+    font-family:'Special Elite',monospace; color:var(--ink);
+    background-color:#b98f5f;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,.08) 0 2px, transparent 3px),
+      radial-gradient(circle at 70% 60%, rgba(0,0,0,.07) 0 1.5px, transparent 2.5px),
+      radial-gradient(circle at 40% 80%, rgba(0,0,0,.05) 0 1px, transparent 2px),
+      linear-gradient(135deg,#c79d6c,#a87d4f);
+    background-size:37px 37px, 23px 23px, 17px 17px, 100% 100%;
+    overflow-x:hidden;
+  }
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+  /* ---------- ENVELOPE INTRO ---------- */
+  #intro{
+    position:fixed; inset:0; z-index:50; display:grid; place-items:center;
+    background:inherit; background-color:#b98f5f; transition:opacity .8s ease, visibility .8s;
+    padding:16px;
+  }
+  #intro.gone{opacity:0; visibility:hidden}
+  .envelope{
+    position:relative; width:min(340px,86vw); aspect-ratio:1.45; cursor:pointer;
+    filter:drop-shadow(0 18px 24px rgba(0,0,0,.35));
+    animation:bob 3s ease-in-out infinite;
+  }
+  @keyframes bob{50%{transform:translateY(-8px) rotate(-1deg)}}
+  /* layer order: back(1) < open flap(2) < letter(3) < front pocket(4) < closed flap(6) < seal(7) */
+  .env-back{position:absolute; inset:0; background:#16304d; border-radius:6px; z-index:1}
+  .env-letter{
+    position:absolute; left:7%; right:7%; top:8%; height:84%; z-index:3;
+    background:var(--paper); border-radius:3px; box-shadow:0 -2px 6px rgba(0,0,0,.15);
+    transition:transform .8s cubic-bezier(.3,1.25,.5,1) .55s;
+    display:flex; justify-content:center; padding-top:9%;
+    font-family:'Caveat'; font-size:1.6rem; color:var(--navy);
+  }
+  .env-front{
+    position:absolute; inset:0; border-radius:0 0 6px 6px; z-index:4;
+    background:linear-gradient(160deg, var(--navy-2), #234669);
+    clip-path:polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%);
+  }
+  .env-front::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(to top right, transparent 49.5%, rgba(0,0,0,.12) 50%, transparent 51%),
+               linear-gradient(to top left, transparent 49.5%, rgba(0,0,0,.12) 50%, transparent 51%);
+  }
+  .env-flap{
+    position:absolute; left:0; right:0; top:0; height:58%; z-index:6;
+    background:linear-gradient(to bottom, #2a4f78, #1c3654);
+    clip-path:polygon(0 0,100% 0,50% 100%); transform-origin:top;
+    transform:perspective(900px) rotateX(0deg);
+    transition:transform .6s ease, z-index 0s linear .3s;
+  }
+  .seal{
+    position:absolute; left:50%; top:56%; transform:translate(-50%,-50%); z-index:7;
+    width:68px; height:68px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #f7e2a6, var(--gold-2) 60%, #a77a25);
+    display:grid; place-items:center; font-family:'Abril Fatface'; font-size:1.7rem; color:#6b4a12;
+    box-shadow:0 3px 6px rgba(0,0,0,.35), inset 0 0 0 4px rgba(255,255,255,.18);
+    transition:transform .4s ease, opacity .4s;
+  }
+  .envelope.open{animation:none}
+  .envelope.open .seal{transform:translate(-50%,-50%) scale(0); opacity:0}
+  .envelope.open .env-flap{transform:perspective(900px) rotateX(180deg); z-index:2}
+  .envelope.open .env-letter{transform:translateY(-38%)}
+  #intro.opening .intro-hint{opacity:0; animation:none; transition:opacity .3s}
+  .intro-hint{
+    position:absolute; bottom:12vh; width:100%; text-align:center;
+    font-family:'Caveat'; font-size:1.7rem; color:var(--paper); text-shadow:0 2px 4px rgba(0,0,0,.35);
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{50%{opacity:.45}}
+  .to-line{
+    position:absolute; top:12vh; width:100%; text-align:center; color:var(--paper);
+    font-family:'Homemade Apple'; font-size:1.15rem; text-shadow:0 2px 4px rgba(0,0,0,.3)
+  }
+
+  /* ---------- PAGE ---------- */
+  main{
+    max-width:760px; margin:0 auto; padding:56px 16px 90px; position:relative;
+    opacity:0; transform:translateY(30px); transition:opacity 1s ease .2s, transform 1s ease .2s;
+  }
+  main.show{opacity:1; transform:none}
+  .page{
+    position:relative; background:var(--paper); padding:52px 28px 46px;
+    box-shadow:0 2px 0 #e6dcc4, 0 4px 0 #ddd1b5, 0 20px 40px rgba(0,0,0,.3);
+    background-image:
+      repeating-linear-gradient(transparent 0 31px, rgba(127,176,220,.28) 31px 32px),
+      linear-gradient(90deg, transparent 46px, rgba(200,85,61,.25) 46px 47px, transparent 47px);
+  }
+  .holes{position:absolute; left:14px; top:40px; bottom:40px; display:flex; flex-direction:column; justify-content:space-around}
+  .holes span{width:16px; height:16px; border-radius:50%; background:#a87d4f; box-shadow:inset 0 2px 3px rgba(0,0,0,.4)}
+
+  .tape{
+    position:absolute; width:110px; height:30px; background:var(--tape);
+    box-shadow:0 1px 2px rgba(0,0,0,.12);
+    clip-path:polygon(3% 0,97% 4%,100% 50%,96% 100%,2% 96%,0 50%);
+    z-index:3;
+  }
+  .tape.blue{background:rgba(127,176,220,.75)}
+  .tape.stripe{background:repeating-linear-gradient(45deg, rgba(31,59,92,.75) 0 8px, rgba(242,211,138,.8) 8px 16px)}
+
+  .reveal{opacity:0; transform:translateY(24px) rotate(var(--r,0deg)); transition:opacity .7s ease, transform .7s cubic-bezier(.3,1.3,.5,1)}
+  .reveal.in{opacity:1; transform:translateY(0) rotate(var(--r,0deg))}
+
+  /* header */
+  .torn{
+    position:relative; margin:0 auto 18px 30px; background:var(--navy); color:var(--gold);
+    padding:16px 22px 18px; width:fit-content; max-width:92%;
+    font-family:'Caveat'; font-size:1.65rem; --r:-2deg;
+    clip-path:polygon(0 6%,4% 0,9% 5%,15% 1%,22% 6%,30% 0,38% 5%,46% 1%,55% 6%,63% 0,71% 4%,80% 0,88% 6%,95% 1%,100% 5%,99% 95%,94% 100%,86% 95%,77% 100%,68% 95%,60% 100%,51% 94%,42% 100%,33% 95%,24% 100%,16% 94%,8% 100%,2% 95%);
+  }
+
+  .ransom{display:flex; justify-content:center; align-items:flex-end; gap:6px; margin:26px 0 6px; flex-wrap:wrap}
+  .ransom span{
+    display:inline-block; padding:4px 12px 2px; line-height:1;
+    box-shadow:2px 3px 0 rgba(0,0,0,.18); transition:transform .25s;
+  }
+  .ransom span:hover{transform:scale(1.08) rotate(0deg)!important}
+  .r1{background:var(--navy); color:var(--gold); font-family:'Abril Fatface'; font-size:clamp(5rem,22vw,9rem); transform:rotate(-6deg)}
+  .r2{background:var(--gold); color:var(--navy); font-family:'Abril Fatface'; font-size:clamp(5rem,22vw,9rem); transform:rotate(4deg)}
+  .r3{background:#fff; color:var(--red); font-family:'Permanent Marker'; font-size:clamp(1.8rem,7vw,3rem); transform:rotate(-8deg) translateY(-60%); border:2px dashed var(--navy)}
+
+  .script{
+    text-align:center; font-family:'Homemade Apple'; color:var(--navy-2);
+    font-size:clamp(2.2rem,9vw,3.8rem); margin:8px 0 4px; --r:-3deg;
+  }
+  .label-strip{
+    display:block; width:fit-content; margin:14px auto 30px; background:#222; color:#fff;
+    font-family:'Special Elite'; letter-spacing:.18em; font-size:.82rem; padding:7px 14px;
+    text-transform:uppercase; --r:1.5deg; text-align:center;
+  }
+
+  /* cards grid */
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:34px 22px; margin-top:10px}
+  @media (max-width:560px){ .grid{grid-template-columns:1fr; gap:36px} .page{padding:46px 18px 40px 34px} .holes{left:8px} .holes span{width:12px;height:12px} .torn{margin-left:8px} }
+
+  .polaroid{
+    position:relative; background:#fff; padding:12px 12px 16px; box-shadow:0 8px 18px rgba(0,0,0,.22);
+    transition:transform .3s;
+  }
+  .polaroid:hover{transform:rotate(0deg) scale(1.03)!important}
+  .polaroid .photo{
+    aspect-ratio:1.15; display:grid; place-items:center; text-align:center; position:relative; overflow:hidden;
+    background:linear-gradient(160deg, var(--navy-2), var(--navy)); color:var(--gold);
+  }
+  .polaroid .caption{font-family:'Caveat'; font-size:1.5rem; text-align:center; margin-top:10px; color:var(--ink)}
+  .date-big .day{font-family:'Abril Fatface'; font-size:5.2rem; line-height:.9}
+  .date-big .mon{font-family:'Special Elite'; letter-spacing:.3em; font-size:1rem; margin-top:4px}
+  .date-big .dow{font-family:'Caveat'; font-size:1.6rem; color:#fff}
+
+  .note{
+    position:relative; background:#fff3b0; padding:24px 20px 20px; box-shadow:0 8px 16px rgba(0,0,0,.2);
+    font-family:'Caveat'; font-size:1.45rem; line-height:1.25;
+  }
+  .note h3{font-family:'Permanent Marker'; font-weight:400; font-size:1.3rem; color:var(--navy); margin-bottom:6px}
+  .note.blue{background:#d7e8f7}
+  .note.pink{background:#f7d9d0}
+
+  .ticket{
+    position:relative; background:var(--cream); border:2px dashed var(--navy-2); padding:18px 16px 16px;
+    text-align:center; box-shadow:0 6px 14px rgba(0,0,0,.18);
+  }
+  .ticket::before,.ticket::after{
+    content:""; position:absolute; top:50%; width:22px; height:22px; border-radius:50%;
+    background:var(--paper); transform:translateY(-50%); border:2px dashed var(--navy-2);
+  }
+  .ticket::before{left:-13px} .ticket::after{right:-13px}
+  .ticket h3{font-family:'Special Elite'; letter-spacing:.2em; font-size:.85rem; font-weight:400; color:var(--navy-2)}
+  .count{display:flex; justify-content:center; gap:10px; margin-top:10px}
+  .count div{min-width:58px}
+  .count b{display:block; font-family:'Abril Fatface'; font-size:2.1rem; color:var(--navy); font-weight:400}
+  .count small{font-size:.7rem; letter-spacing:.12em; text-transform:uppercase}
+
+  .swatches{display:flex; gap:8px; margin-top:10px}
+  .swatches i{width:34px; height:34px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,.25); border:3px solid #fff; cursor:pointer; transition:transform .2s}
+  .swatches i:hover{transform:scale(1.2) rotate(10deg)}
+
+  .stamp{
+    position:absolute; right:-12px; bottom:-26px; width:84px; height:84px; border-radius:50%;
+    border:3px double var(--red); color:var(--red); display:grid; place-items:center; text-align:center;
+    font-family:'Special Elite'; font-size:.7rem; line-height:1.15; transform:rotate(-14deg);
+    background:rgba(255,255,255,.4); letter-spacing:.06em;
+  }
+
+  /* RSVP */
+  .rsvp{margin-top:46px; position:relative; background:var(--navy); color:var(--paper); padding:30px 22px 74px; --r:-1deg; box-shadow:0 10px 22px rgba(0,0,0,.28)}
+  .rsvp h2{font-family:'Homemade Apple'; color:var(--gold); font-weight:400; font-size:1.8rem; text-align:center}
+  .rsvp p{text-align:center; font-family:'Caveat'; font-size:1.5rem; margin-top:8px}
+  .rsvp .warn{font-family:'Permanent Marker'; color:#ffb4a2; font-size:1.05rem; margin-top:4px}
+  .btns{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:20px}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:12px 18px; text-decoration:none;
+    font-family:'Permanent Marker'; font-size:1rem; color:var(--navy); background:var(--gold);
+    box-shadow:3px 4px 0 rgba(0,0,0,.35); transform:rotate(-1.5deg); transition:transform .15s, box-shadow .15s;
+  }
+  .btn:nth-child(2){background:#fff; transform:rotate(1.5deg)}
+  .btn:nth-child(3){background:var(--sky); transform:rotate(-.5deg)}
+  .btn:hover{transform:rotate(0) translateY(-2px)} .btn:active{transform:translate(2px,3px); box-shadow:1px 1px 0 rgba(0,0,0,.35)}
+  .closed{font-family:'Special Elite'!important; font-size:1rem!important; color:var(--gold)}
+
+  /* stickers */
+  .sticker{
+    position:absolute; font-size:2.6rem; line-height:1; cursor:grab; user-select:none; touch-action:none; z-index:10;
+    -webkit-user-select:none; -webkit-touch-callout:none;
+    /* moved with transform only, on its own GPU layer, so dragging never repaints the page */
+    transform:translate3d(var(--x,0px),var(--y,0px),0) rotate(var(--rot,0deg)) scale(var(--s,1));
+    will-change:transform; backface-visibility:hidden;
+    text-shadow:0 3px 3px rgba(0,0,0,.25);
+  }
+  .sticker.drag{cursor:grabbing; --s:1.15; z-index:20}
+  .sticker.badge{
+    font-family:'Permanent Marker'; font-size:1rem; color:#fff; background:var(--red);
+    width:74px; height:74px; border-radius:50%; display:grid; place-items:center; text-align:center; line-height:1;
+    border:3px solid #fff; box-shadow:0 3px 5px rgba(0,0,0,.3); text-shadow:none;
+  }
+  .hint{text-align:center; font-family:'Caveat'; font-size:1.25rem; color:var(--paper); margin-top:22px; text-shadow:0 1px 3px rgba(0,0,0,.4)}
+  .from{text-align:right; font-family:'Homemade Apple'; color:var(--navy-2); margin-top:34px; font-size:1.05rem}
+
+  .scroll-arrow{
+    position:fixed; left:50%; bottom:calc(18px + env(safe-area-inset-bottom)); z-index:40;
+    width:54px; height:54px; border-radius:50%; background:var(--gold); color:var(--navy);
+    display:grid; place-items:center; box-shadow:3px 4px 0 rgba(0,0,0,.3);
+    border:3px solid #fff; transform:translateX(-50%);
+    opacity:0; pointer-events:none; transition:opacity .4s;
+  }
+  .scroll-arrow.on{opacity:1; pointer-events:auto; animation:nudge 1.6s ease-in-out infinite}
+  .scroll-arrow svg{width:24px; height:24px}
+  @keyframes nudge{0%,100%{transform:translate(-50%,0)} 50%{transform:translate(-50%,8px)}}
+
+  #confetti{position:fixed; inset:0; pointer-events:none; z-index:60}
+  .toast{
+    position:fixed; left:50%; bottom:24px; transform:translate(-50%,120px); background:var(--ink); color:var(--paper);
+    padding:10px 16px; font-family:'Caveat'; font-size:1.3rem; z-index:70; transition:transform .35s; box-shadow:0 6px 14px rgba(0,0,0,.3)
+  }
+  .toast.on{transform:translate(-50%,0)}
+  @media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} .reveal,main{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+
+<!-- Envelope intro -->
+<section id="intro" aria-label="Open your invitation">
+  <div class="to-line">for you, with love ✉</div>
+  <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Tap to open the invitation">
+    <div class="env-back"></div>
+    <div class="env-letter">You're invited!</div>
+    <div class="env-front"></div>
+    <div class="env-flap"></div>
+    <div class="seal">60</div>
+  </div>
+  <div class="intro-hint">tap to open</div>
+</section>
+
+<canvas id="confetti"></canvas>
+
+<main id="main">
+  <div class="page" id="page">
+    <div class="holes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+
+    <div class="tape stripe" style="top:-12px;left:42%;transform:rotate(-3deg)"></div>
+
+    <div class="torn reveal">please join us to celebrate Amien</div>
+
+    <div class="ransom reveal" aria-label="60th">
+      <span class="r1">6</span><span class="r2">0</span><span class="r3">th</span>
+    </div>
+    <h1 class="script reveal">Birthday!</h1>
+    <span class="label-strip reveal">It's a milestone worth celebrating!</span>
+
+    <div class="grid">
+      <!-- date polaroid -->
+      <div class="polaroid reveal" style="--r:-4deg">
+        <div class="tape" style="top:-14px;left:30%;transform:rotate(4deg)"></div>
+        <div class="photo date-big">
+          <div>
+            <div class="dow">Saturday</div>
+            <div class="day">16</div>
+            <div class="mon">JANUARY</div>
+          </div>
+        </div>
+        <div class="caption">save the date!</div>
+      </div>
+
+      <!-- venue note -->
+      <div class="note blue reveal" style="--r:3deg">
+        <div class="tape" style="top:-14px;right:20px;transform:rotate(-6deg)"></div>
+        <h3>📍 Where</h3>
+        Rietvlei Zoo<br>Playground Hall
+        <div style="margin-top:12px">
+          <a class="btn" style="font-size:.85rem;padding:8px 12px" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&query=Rietvlei+Zoo+Farm">Open in Maps</a>
+        </div>
+      </div>
+
+      <!-- dress code -->
+      <div class="note reveal" style="--r:-2deg">
+        <div class="tape blue" style="top:-14px;left:24px;transform:rotate(-4deg)"></div>
+        <h3>👔 Dress code</h3>
+        Dress in <span style="color:var(--navy-2);font-weight:700">BLUE!</span>
+        <div class="swatches" aria-label="Blue shades">
+          <i style="background:#0f2a4a" data-c="Midnight"></i>
+          <i style="background:#1f3b5c" data-c="Navy"></i>
+          <i style="background:#2c6eb5" data-c="Royal"></i>
+          <i style="background:#7fb0dc" data-c="Sky"></i>
+          <i style="background:#a9d6e5" data-c="Baby blue"></i>
+        </div>
+      </div>
+
+      <!-- countdown ticket -->
+      <div class="ticket reveal" style="--r:2deg">
+        <h3>★ ADMIT ONE · COUNTDOWN ★</h3>
+        <div class="count" id="count">
+          <div><b id="d">--</b><small>days</small></div>
+          <div><b id="h">--</b><small>hrs</small></div>
+          <div><b id="m">--</b><small>min</small></div>
+          <div><b id="s">--</b><small>sec</small></div>
+        </div>
+        <button class="btn" id="calBtn" style="margin-top:14px;font-size:.85rem;padding:8px 12px">📅 Add to calendar</button>
+      </div>
+    </div>
+
+    <!-- RSVP -->
+    <div class="rsvp reveal">
+      <div class="tape" style="top:-14px;left:12%;transform:rotate(-5deg)"></div>
+      <div class="tape blue" style="top:-14px;right:12%;transform:rotate(6deg)"></div>
+      <h2>Kindly RSVP</h2>
+      <p>by the 25<sup>th</sup> of December to Sara</p>
+      <p class="warn">no RSVP = no attendance!</p>
+      <div class="btns" id="rsvpBtns">
+        <a class="btn" id="waBtn" target="_blank" rel="noopener">💬 WhatsApp Sara</a>
+        <a class="btn" href="tel:+27825676874">📞 082 567 6874</a>
+        <a class="btn" href="sms:+27825676874">✉️ SMS</a>
+      </div>
+      <div class="stamp">RSVP<br>BY<br>25 DEC</div>
+    </div>
+
+    <div class="from reveal">can't wait to celebrate with you ♡</div>
+
+    <!-- draggable stickers -->
+    <div class="sticker" style="top:30px;right:22px">🎈</div>
+    <div class="sticker" style="top:250px;left:6px">⭐</div>
+    <div class="sticker" style="top:150px;right:4px">🎉</div>
+    <div class="sticker badge" style="top:-26px;left:-14px;--rot:-12deg">SIXTY &amp; FAB!</div>
+    <div class="sticker" style="bottom:120px;left:12px">🎂</div>
+    <div class="sticker" style="bottom:-24px;left:44%">💙</div>
+  </div>
+  <p class="hint">psst… you can drag the stickers around ✨</p>
+</main>
+
+<button class="scroll-arrow" id="scrollArrow" aria-label="Scroll down">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  const PARTY = new Date('2027-01-16T00:00:00+02:00');
+  const RSVP_BY = new Date('2026-12-26T00:00:00+02:00');
+  const PHONE = '27825676874';
+
+  /* ---------- envelope ---------- */
+  const intro = document.getElementById('intro');
+  const env = document.getElementById('envelope');
+  const main = document.getElementById('main');
+  let opened = false;
+  function openEnvelope(){
+    if (opened) return; opened = true;
+    env.classList.add('open');
+    intro.classList.add('opening');
+    setTimeout(() => {
+      const r = env.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height*0.2, 170);
+    }, 900);
+    setTimeout(() => {
+      intro.classList.add('gone');
+      main.classList.add('show');
+      observe();
+      updateArrow();
+    }, 1700);
+  }
+
+  /* ---------- scroll arrow ---------- */
+  const arrow = document.getElementById('scrollArrow');
+  function updateArrow(){
+    if (!opened) return;
+    const nearBottom = innerHeight + scrollY >= document.documentElement.scrollHeight - 120;
+    arrow.classList.toggle('on', !nearBottom);
+  }
+  addEventListener('scroll', updateArrow, {passive:true});
+  addEventListener('resize', updateArrow);
+  arrow.addEventListener('click', () => scrollBy({top: innerHeight * 0.75, behavior:'smooth'}));
+  env.addEventListener('click', openEnvelope);
+  env.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' '){ e.preventDefault(); openEnvelope(); }});
+
+  /* ---------- scroll reveal ---------- */
+  function observe(){
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(e=>e.classList.add('in')); return; }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }});
+    }, {threshold:.15});
+    els.forEach((el,i) => { el.style.transitionDelay = (Math.min(i,4)*90)+'ms'; io.observe(el); });
+  }
+
+  /* ---------- countdown ---------- */
+  const pad = n => String(n).padStart(2,'0');
+  function tick(){
+    const diff = PARTY - new Date();
+    if (diff <= 0){
+      document.getElementById('count').innerHTML = '<b style="font-size:1.6rem">🎉 Party time!</b>';
+      return;
+    }
+    const s = Math.floor(diff/1000);
+    document.getElementById('d').textContent = Math.floor(s/86400);
+    document.getElementById('h').textContent = pad(Math.floor(s%86400/3600));
+    document.getElementById('m').textContent = pad(Math.floor(s%3600/60));
+    document.getElementById('s').textContent = pad(s%60);
+    setTimeout(tick, 1000);
+  }
+  tick();
+
+  /* ---------- RSVP ---------- */
+  const msg = "Hi Sara! I'd love to RSVP for Amien's 60th birthday on Saturday 16 January 🎉\nName(s): \nNumber attending: ";
+  document.getElementById('waBtn').href = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(msg);
+  if (new Date() >= RSVP_BY){
+    document.getElementById('rsvpBtns').insertAdjacentHTML('beforebegin','<p class="closed">RSVPs have closed — see you there!</p>');
+  }
+
+  /* ---------- calendar (.ics) ---------- */
+  document.getElementById('calBtn').addEventListener('click', e => {
+    e.stopPropagation();
+    const ics = [
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Amien60//Invite//EN','CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+      'UID:amien-60th-20270116@invite',
+      'DTSTAMP:20261029T000000Z',
+      'DTSTART;VALUE=DATE:20270116',
+      'DTEND;VALUE=DATE:20270117',
+      "SUMMARY:Amien's 60th Birthday 🎉",
+      'LOCATION:Rietvlei Zoo Playground Hall',
+      'DESCRIPTION:Dress in blue! RSVP to Sara (082 567 6874) by 25 December.',
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+    const url = URL.createObjectURL(new Blob([ics], {type:'text/calendar'}));
+    const a = Object.assign(document.createElement('a'), {href:url, download:'amien-60th-birthday.ics'});
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast('Saved to your calendar 📅');
+  });
+
+  /* ---------- swatches ---------- */
+  document.querySelectorAll('.swatches i').forEach(sw => sw.addEventListener('click', e => {
+    e.stopPropagation(); toast(sw.dataset.c + ' blue — great choice! 💙');
+  }));
+
+  /* ---------- toast ---------- */
+  const t = document.getElementById('toast'); let tt;
+  function toast(text){ t.textContent = text; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(()=>t.classList.remove('on'), 2200); }
+
+  /* ---------- draggable stickers ---------- */
+  const page = document.getElementById('page');
+  document.querySelectorAll('.sticker').forEach(st => {
+    let sx, sy, ox = 0, oy = 0, nx = 0, ny = 0, raf = 0;
+    st.addEventListener('pointerdown', e => {
+      e.preventDefault(); e.stopPropagation();
+      st.setPointerCapture(e.pointerId);
+      sx = e.clientX; sy = e.clientY; ox = nx; oy = ny;
+      st.classList.add('drag');
+    });
+    st.addEventListener('pointermove', e => {
+      if (!st.classList.contains('drag')) return;
+      nx = ox + e.clientX - sx; ny = oy + e.clientY - sy;
+      if (!raf) raf = requestAnimationFrame(() => {
+        raf = 0;
+        st.style.setProperty('--x', nx + 'px');
+        st.style.setProperty('--y', ny + 'px');
+      });
+    });
+    const end = () => st.classList.remove('drag');
+    st.addEventListener('pointerup', end);
+    st.addEventListener('pointercancel', end);
+  });
+
+  /* ---------- confetti ---------- */
+  const cv = document.getElementById('confetti'), cx = cv.getContext('2d');
+  let parts = [], running = false;
+  const colors = ['#f2d38a','#d9a943','#1f3b5c','#2c6eb5','#7fb0dc','#ffffff','#c8553d'];
+  function resize(){ cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; cx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0); }
+  addEventListener('resize', resize); resize();
+  function burst(x, y, n){
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    for (let i=0;i<n;i++){
+      const a = Math.random()*Math.PI*2, v = 4 + Math.random()*8;
+      parts.push({x, y, vx:Math.cos(a)*v, vy:Math.sin(a)*v - 4, w:6+Math.random()*6, h:8+Math.random()*10,
+        r:Math.random()*6, vr:(Math.random()-.5)*.3, c:colors[i%colors.length], life:120+Math.random()*60});
+    }
+    if (!running){ running = true; requestAnimationFrame(loop); }
+  }
+  function loop(){
+    cx.clearRect(0,0,innerWidth,innerHeight);
+    parts = parts.filter(p => p.life-- > 0 && p.y < innerHeight + 40);
+    parts.forEach(p => {
+      p.vy += .22; p.vx *= .985; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      cx.save(); cx.translate(p.x,p.y); cx.rotate(p.r); cx.fillStyle = p.c;
+      cx.fillRect(-p.w/2, -p.h/2, p.w, p.h * Math.abs(Math.cos(p.r*2))); cx.restore();
+    });
+    if (parts.length) requestAnimationFrame(loop); else { running = false; cx.clearRect(0,0,innerWidth,innerHeight); }
+  }
+})();
+</script>
+</body>
+</html>
