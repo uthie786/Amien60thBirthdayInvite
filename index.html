@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Amien's 60th Birthday</title>
-<meta name="description" content="You're invited to celebrate Amien Naidoo's 60th birthday — Saturday 16 January.">
+<meta name="description" content="You're invited to celebrate Amien Naidoo's 60th birthday — Saturday 16 January at 5pm.">
 <meta property="og:title" content="You're invited: Amien's 60th Birthday!">
-<meta property="og:description" content="Saturday 16 January · Rietvlei Zoo Playground Hall · Dress in blue">
+<meta property="og:description" content="Saturday 16 January · 5pm · Rietvlei Zoo Playground Hall · Dress in blue">
 <meta name="theme-color" content="#1f3b5c">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎈</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -169,6 +169,18 @@
   .date-big .day{font-family:'Abril Fatface'; font-size:5.2rem; line-height:.9}
   .date-big .mon{font-family:'Special Elite'; letter-spacing:.3em; font-size:1rem; margin-top:4px}
   .date-big .dow{font-family:'Caveat'; font-size:1.6rem; color:#fff}
+  .time-tag{
+    position:absolute; top:22px; right:-18px; z-index:4; transform:rotate(9deg);
+    background:var(--red); color:#fff; padding:8px 14px 8px 22px; text-align:center;
+    font-family:'Permanent Marker'; font-size:1.5rem; line-height:1; box-shadow:2px 4px 0 rgba(0,0,0,.25);
+    clip-path:polygon(14px 0,100% 0,100% 100%,14px 100%,0 50%);
+  }
+  .time-tag::before{
+    content:""; position:absolute; left:9px; top:50%; width:7px; height:7px; border-radius:50%;
+    background:#fff; transform:translateY(-50%);
+  }
+  .time-tag small{display:block; font-family:'Special Elite'; font-size:.6rem; letter-spacing:.15em; margin-top:3px}
+  .dinner{font-family:'Special Elite'; font-size:.85rem; letter-spacing:.06em; text-align:center; color:var(--navy-2); margin-top:2px}
 
   .note{
     position:relative; background:#fff3b0; padding:24px 20px 20px; box-shadow:0 8px 16px rgba(0,0,0,.2);
@@ -317,7 +329,9 @@
             <div class="mon">JANUARY</div>
           </div>
         </div>
+        <div class="time-tag">5PM<small>START</small></div>
         <div class="caption">save the date!</div>
+        <div class="dinner">🍽 dinner served at 5:30pm</div>
       </div>
 
       <!-- venue note -->
@@ -411,7 +425,7 @@
 
 <script>
 (() => {
-  const PARTY = new Date('2027-01-16T00:00:00+02:00');
+  const PARTY = new Date('2027-01-16T17:00:00+02:00');
   const RSVP_BY = new Date('2026-12-26T00:00:00+02:00');
   const PHONE = '27825676874';
 
@@ -493,11 +507,10 @@
       'BEGIN:VEVENT',
       'UID:amien-60th-20270116@invite',
       'DTSTAMP:20261029T000000Z',
-      'DTSTART;VALUE=DATE:20270116',
-      'DTEND;VALUE=DATE:20270117',
+      'DTSTART:20270116T150000Z',
       "SUMMARY:Amien's 60th Birthday 🎉",
       'LOCATION:Rietvlei Zoo Playground Hall',
-      'DESCRIPTION:Dress in blue! RSVP to Sara (082 567 6874) or Fawzie (060 610 3297) by 25 December.',
+      'DESCRIPTION:Starts 5pm\\, dinner at 5:30pm. Dress in blue! RSVP to Sara (082 567 6874) or Fawzie (060 610 3297) by 25 December.',
       'END:VEVENT','END:VCALENDAR'
     ].join('\r\n');
     const url = URL.createObjectURL(new Blob([ics], {type:'text/calendar'}));
